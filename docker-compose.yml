@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+    cbdb:
+        build:
+          context: .
+          dockerfile: Dockerfile-CB
+        ports:
+            - "8091-8094:8091-8094"
+            - "11207-11210:11207-11210"
+            - "18091-18094:18091-18094"
+    sg:
+        image: couchbase/sync-gateway:1.4.0-2
+        ports:
+            - "4984:4984"
+            - "4985:4985"
+        volumes:
+            - ./sync-gateway-config.json:/etc/sync_gateway/config.json
